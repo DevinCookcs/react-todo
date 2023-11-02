@@ -1,22 +1,31 @@
-import { useState } from 'react'
 import './App.css'
+import { useState } from 'react'
 import { Task } from "./Task"
 
 function App() {
   const [todoList, setTodoList] = useState([]);
   const [newTask, setNewTask] = useState("");
 
+
   const handleChange = (event) => {
     setNewTask(event.target.value);
   };
 
-  const addTask = () => {
+  const addTask = (e) => {
     const task = {
       id: todoList.length === 0 ? 1 : todoList[todoList.length - 1].id + 1,
       taskName: newTask,
       completed: false
     };
-    setTodoList([...todoList, task]);
+    //check for empty input
+    if (newTask.trim() === "") {
+      alert("input must not be empty")
+    } else {
+      setTodoList([...todoList, task]);
+    }
+    
+    //clear text field
+    setNewTask("");
   };
 
   const deleteTask = (id) => {
@@ -33,11 +42,20 @@ function App() {
     }))
   }
 
+
   return (
     <div className="App">
 
       <div className="addTask">
-        <input onChange={handleChange} />
+        <input 
+          onBlur={e => {
+            if (e.relatedTarget === null) {
+              e.target.focus();
+            }
+          }}
+          value={newTask} 
+          onChange={handleChange} 
+        />
         <button onClick={addTask}>Add Task</button>
       </div>
 
