@@ -48,6 +48,7 @@ function App() {
 
       <div className="addTask">
         <input 
+          //keep focus on input field
           onBlur={e => {
             if (e.relatedTarget === null) {
               e.target.focus();
