@@ -7,11 +7,11 @@ function App() {
   const [newTask, setNewTask] = useState("");
 
 
-  const handleChange = (event) => {
-    setNewTask(event.target.value);
+  const handleChange = (e) => {
+    setNewTask(e.target.value);
   };
 
-  const addTask = (e) => {
+  const addTask = () => {
     const task = {
       id: todoList.length === 0 ? 1 : todoList[todoList.length - 1].id + 1,
       taskName: newTask,
@@ -42,6 +42,14 @@ function App() {
     }))
   }
 
+  //allow enter to submit task
+  const handleKeypress = (e) => {
+    if (e.code === "Enter") {
+      console.log("Enter");
+      addTask();
+    }
+  }
+
 
   return (
     <div className="App">
@@ -50,6 +58,7 @@ function App() {
         <input 
           //keep focus on input field
           onBlur={e => e.target.focus()}
+          onKeyDown={handleKeypress}
           value={newTask} 
           onChange={handleChange} 
         />
