@@ -39,6 +39,10 @@ body {
   text-align: center;
 }
 
+#task-item {
+  text-align: left;
+}
+
 .task button {
   width: 25px;
   height: 20px;
